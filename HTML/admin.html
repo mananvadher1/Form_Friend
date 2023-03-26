@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Form Management</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Form Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Form 1</td>
+                        <td><button>Edit</button></td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Form 2</td>
+                        <td><button>Edit</button></td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h2>Form Sharing</h2>
+            <form>
+                <label for="form-name">Form Name:</label>
+                <select id="form-name">
+                    <option value="form1">Form 1</option>
+                    <option value="form2">Form 2</option>
+                </select>
+                <button id="generate-link">Generate Link</button>
+                <p id="form-link"></p>
+            </form>
+        </section>
+        <section>
+            <h2>Reminders</h2>
+            <form>
+                <label for="form-name">Form Name:</label>
+                <select id="form-name">
+                    <option value="form1">Form 1</option>
+                    <option value="form2">Form 2</option>
+                </select>
+                <label for="reminder-date">Reminder Date:</label>
+                <input type="date" id="reminder-date">
+                <label for="reminder-time">Reminder Time:</label>
+                <input type="time" id="reminder-time">
+                <button id="schedule-reminder">Schedule Reminder</button>
+            </form>
+        </section>
+        <section>
+            <h2>Form Analytics</h2>
+            <canvas id="form-analytics"></canvas>
+        </section>
+        <section>
+            <h2>User Management</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>johndoe@example.com</td>
+                        <td><button>Edit</button></td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Jane Doe</td>
+                        <td>janedoe@example.com</td>
+                        <td><button>Edit</button></td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+     
+</body>
+
+</html>
