@@ -66,11 +66,11 @@
         /* Add padding to containers */
         .container {
             z-index: 0;
-            position: relative;
-            padding: 16px;
+            padding: 25px;
             background-color: white;
             max-width: 500px;
-            margin: 0 auto;
+            margin: auto;
+            margin-top: 100px;
         }
 
         /* Full-width input fields */
@@ -119,6 +119,7 @@
 
         /* Set a grey background color and center the text of the "sign up" section */
         .signup {
+            padding: 10px;
             background-color: #f1f1f1;
             text-align: center;
         }
@@ -144,10 +145,10 @@
             <h1>Login</h1>
             <div style="display: flex; justify-content: center;">
                 <input type="radio" name="role" id="student" value="student">
-                <label for="student">Student</label>
+                <label for="student" style="font-weight: bold;">Student</label>
                 <input type="radio" name="role" id="faculty" value="faculty">
-                <label for="faculty">Faculty</label>
-             </div>
+                <label for="faculty" style="font-weight: bold;">Faculty</label>
+            </div>
             <hr>
 
             <label for="username"><b>Username</b></label>
@@ -164,12 +165,10 @@
 
             <span class="psw">Forgot <a href="#">password?</a></span>
 
-
+            <div class="signup">
+                <p>Don't have an account? <a href="signup.html">Sign up</a>.</p>
+            </div>
     </form>
-
-    <div class="container signup">
-        <p>Don't have an account? <a href="signup.html">Sign up</a>.</p>
-    </div>
     <footer>
         <p>&copy; 2023 My Website. All rights reserved.</p>
     </footer>
