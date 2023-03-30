@@ -126,6 +126,67 @@
             background-color: #f1f1f1;
             text-align: center;
         }
+
+        /* paste frome here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            width: 600px;
+            margin: 0 auto;
+            
+            border-radius: 10px;
+            padding: 20px;
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        select {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+
+        .sform {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            /* Add some margin to the top of the button */
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+       
+        select {
+            background-color: #ddd;
+            outline: none;
+        }
     </style>
 </head>
 
@@ -166,7 +227,41 @@
 
             <label for="email"><b>Email</b></label>
             <input type="email" placeholder="Enter Email" name="email" id="email" required>
-
+            <label for="semester">Semester:</label>
+            <select id="semester" name="semester" required>
+                <option value="">Select a semester</option>
+                <option value="1">First</option>
+                <option value="2">Second</option>
+                <option value="3">Third</option>
+                <option value="4">Fourth</option>
+                <option value="5">Fifth</option>
+                <option value="6">Sixth</option>
+                <option value="7">Seventh</option>
+                <option value="8">Eighth</option>
+            </select>
+            <label for="branch">Branch:</label>
+            <select id="branch" name="branch" required>
+                <option value="">Select a branch</option>
+                <option value="CSE">Computer Science and Engineering</option>
+                <option value="ECE">Electronics and Communication Engineering</option>
+                <option value="ME">Mechanical Engineering</option>
+                <option value="CE">Civil Engineering</option>
+                <option value="EE">Electrical Engineering</option>
+            </select>
+            <label for="batch">Batch:</label>
+            <select id="batch" name="batch" required>
+                <option value="">Select a batch</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+            </select>
+            <label for="college">College:</label>
+            <select id="college" name="college" required>
+                <option value="">Select a college</option>
+                <option value="ABC">ABC College of Engineering</option>
+                <option value="XYZ">XYZ College of Technology</option>
+                <option value="PQR">PQR College of Science</option>
+            </select>
             <label for="mnub"><b>Mobile number</b></label>
             <input type="number" placeholder="Enter Mobile number" name="mnum" id="mnub" required>
 
