@@ -255,7 +255,7 @@
                 </select>
                 <label for="mobile"><b>Mobile number</b></label>
                 <input type="number" placeholder="Enter Mobile number" name="mobile" id="mobile" required>
-                <label for="enroll"><b>Mobile number</b></label>
+                <label for="enroll"><b>Enrollment No </b></label>
                 <input type="number" placeholder="enroll" name="enroll" id="enroll" required>
 
                 <label for="psw"><b>Password</b></label>
