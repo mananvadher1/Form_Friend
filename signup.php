@@ -195,7 +195,7 @@
     <body>
     <?php include('./navbar.php'); ?>
 
-        <form action="./backend/registration.php">
+        <form action="./backend/registration.php" method="POST">
             <div class="container">
                 <h1>Sign Up</h1>
                 <div style="display: flex; justify-content: center;">
