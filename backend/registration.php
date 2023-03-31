@@ -20,7 +20,7 @@ if(isset($_POST['register'])){
     $enroll = $_POST['enroll'];
 
     if($psw == $pswRep) {
-        $psw = md5($psw);
+      
         if($role == 'student') {
             $roleUser = 0;
         } else {
@@ -61,7 +61,7 @@ if(isset($_POST['register'])){
     $pswRep = $_POST['psw_repeat'];
 
     if($psw == $pswRep) {
-        $psw = md5($psw);
+       
         if($role == 'student') {
             $roleUser = 0;
         } else {
@@ -106,8 +106,8 @@ if ($result->num_rows > 0) {
 }
 
 // Insert the user data into the database
-$sql = "INSERT INTO users   ( fname, lname, email, semester, branch ,enroll ,batch, college, mobile, psw , pswRep)
-VALUES ('$fname', '$lname', '$email', '$semester', '$branch', $enroll , '$batch', '$college', '$mobile', '$psw' , '$pswRep')";
+$sql = "INSERT INTO users   ( username,fname, lname, email, semester, branch ,enroll ,batch, college, mobile, psw , pswRep)
+VALUES ('$username', '$fname', '$lname', '$email', '$semester', '$branch', $enroll , '$batch', '$college', '$mobile', '$psw' , '$pswRep')";
 
 if(empty($branch) || empty($batch) || empty($college) || empty($mobile) || empty($psw) || empty($psw_repeat)) {
     echo "Please fill all the fields.";}
@@ -120,15 +120,16 @@ if(empty($branch) || empty($batch) || empty($college) || empty($mobile) || empty
   //   // Execute the query and check for errors
     if(mysqli_query($conn, $sql)) {
       echo "Data inserted successfully.";
+      echo "<script>window.location.href = './../home.php';</script>";
     } else {
       echo "Error: " . mysqli_error($conn);
     }
 
-if ($conn->query($sql) === TRUE) {
-  echo "Registration successful. Welcome to our website!";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
+// if ($conn->query($sql) === TRUE) {
+//   echo "Registration successful. Welcome to our website!";
+// } else {
+//   echo "Error: " . $sql . "<br>" . $conn->error;
+// }
 
 // Close the connection
 $conn->close();

@@ -131,7 +131,7 @@
 
 <body>
     <?php include('./navbar.php'); ?>
-    <form action="/action_page.php">
+    <form action="./login_check.php" method="post"  >
         <div class="container">
             <h1>Login</h1>
             <div style="display: flex; justify-content: center;">
