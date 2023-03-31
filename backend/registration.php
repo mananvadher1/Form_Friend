@@ -2,11 +2,12 @@
 
 include('./../php/config.php');
 
+
 if(isset($_POST['register'])){
 
     $role = $_POST['role'];
     $username = $_POST['username'];
-    $fname = $_POST['fname'];
+    $fname = $_POST['fname']; 
     $lname = $_POST['lname'];
     $email = $_POST['email'];
     $semester = $_POST['semester'];
@@ -16,6 +17,7 @@ if(isset($_POST['register'])){
     $mobile = $_POST['mobile'];
     $psw = $_POST['psw'];
     $pswRep = $_POST['psw_repeat'];
+    $enroll = $_POST['enroll'];
 
     if($psw == $pswRep) {
         $psw = md5($psw);
@@ -79,7 +81,7 @@ if(isset($_POST['register'])){
 }
 
 // Validate the form data
-if (empty($role) || empty($username) || empty($fname) || empty($lname) || empty($email) || empty($semester) || empty($branch) || empty($batch) || empty($college) || empty($mnum) || empty($psw) || empty($psw_repeat)) {
+if (empty($role) || empty($username) || empty($fname) || empty($lname) || empty($email) || empty($semester) || empty($branch) || empty($batch) || empty($college) || empty($mobile) || empty($psw) || empty($pswRep)) {
   echo "Please fill all the fields.";
   exit();
 }
@@ -104,18 +106,18 @@ if ($result->num_rows > 0) {
 }
 
 // Insert the user data into the database
-$sql = "INSERT INTO users (role, username, fname, lname, email, semester, branch)
-VALUES ('$role', '$username', '$fname', '$lname', '$email', '$semester', '$branch')";
+$sql = "INSERT INTO users   ( fname, lname, email, semester, branch ,enroll ,batch, college, mobile, psw , pswRep)
+VALUES ('$fname', '$lname', '$email', '$semester', '$branch', $enroll , '$batch', '$college', '$mobile', '$psw' , '$pswRep')";
 
-if(empty($branch) || empty($batch) || empty($college) || empty($mnum) || empty($psw) || empty($psw_repeat)) {
-    echo "Please fill all the fields.";
-  } else if($psw != $psw_repeat) {
-    echo "Passwords do not match.";
-  } else {
-    // Prepare the SQL query to insert the data into the table
-    $sql = "INSERT INTO students (branch, batch, college, mnum, psw) VALUES ('$branch', '$batch', '$college', '$mnum', '$psw')";
-  }
-    // Execute the query and check for errors
+if(empty($branch) || empty($batch) || empty($college) || empty($mobile) || empty($psw) || empty($psw_repeat)) {
+    echo "Please fill all the fields.";}
+  // } else if($psw != $psw_repeat) {
+  //   echo "Passwords do not match.";
+  // } else {
+  //   // Prepare the SQL query to insert the data into the table
+  //   $sql = "INSERT INTO users ( batch, college, mobile, psw) VALUES ( '$batch', '$college', '$mobile', '$psw')";
+  // }
+  //   // Execute the query and check for errors
     if(mysqli_query($conn, $sql)) {
       echo "Data inserted successfully.";
     } else {

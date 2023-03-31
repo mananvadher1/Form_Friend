@@ -1,5 +1,8 @@
+<?php
+    include('./php/config.php');
+    ?>
 <header>
-        <h1>My Website</h1>
+        <h1>Form Manager</h1>
         <nav>
             <ul>
                 <li><a href="home.php">Home</a></li>

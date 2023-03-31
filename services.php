@@ -1,26 +1,23 @@
+<?php
+    include('./php/config.php');
+    ?>
+
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Form Manager Home Page</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/home.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/home.css">
+   
 </head>
 
 <body>
-    <header>
-        <h1>Form Manager</h1>
-        <nav>
-            <ul>
-                <li><a href="./home.html">Home</a></li>
-                <li><a href="./about.html">About</a></li>
-                <li><a href="./services.html">Services</a></li>
-                <li><a href="./contact.html">Contact</a></li>
-                <li><a href="./login.html">Login</a></li>
-                <li><a href="./signup.html">Sign up</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
+<?php
+    include('./php/config.php');
+    ?>
+    <?php include('./navbar.php'); ?>
+    <!-- <main>
         <section>
             <h2>Welcome to Form Manager</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam hendrerit augue ac leo ultrices eleifend.
@@ -31,7 +28,7 @@
     </main>
     <footer>
         <p>&copy; 2023 Form Manager. All rights reserved.</p>
-    </footer>
+    </footer> -->
     <script src="/js/home.js"></script>
 </body>
 

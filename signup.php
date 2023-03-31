@@ -255,6 +255,8 @@
                 </select>
                 <label for="mobile"><b>Mobile number</b></label>
                 <input type="number" placeholder="Enter Mobile number" name="mobile" id="mobile" required>
+                <label for="enroll"><b>Mobile number</b></label>
+                <input type="number" placeholder="enroll" name="enroll" id="enroll" required>
 
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
@@ -264,7 +266,7 @@
                 <hr>
 
                 <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-                <button type="submit" name="register" class="registerbtn">Register</button>
+                <button type="submit" name="register" class="registerbtn" value="set">Register</button>
             </div>
         </form>
         <div class="signin">
