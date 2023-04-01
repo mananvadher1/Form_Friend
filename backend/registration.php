@@ -21,11 +21,11 @@ if(isset($_POST['register'])){
 
     if($psw == $pswRep) {
       
-        if($role == 'student') {
-            $roleUser = 0;
-        } else {
-            $roleUser = 1;
-        }
+        // if($role == '0') {
+        //     $roleUser = 0;
+        // } else {
+        //     $roleUser = 1;
+        // }
         $name = $fname . $lname;
 
     } else {
@@ -39,7 +39,7 @@ if(isset($_POST['register'])){
     echo "<script>window.location.href = './../index.php';</script>";
 }
 
-?> -->
+?>-->
 
 <?php
 
@@ -59,14 +59,14 @@ if(isset($_POST['register'])){
     $mobile = $_POST['mobile'];
     $psw = $_POST['psw'];
     $pswRep = $_POST['psw_repeat'];
-
+    $enroll = $_POST['enroll'];
     if($psw == $pswRep) {
        
-        if($role == 'student') {
-            $roleUser = 0;
-        } else {
-            $roleUser = 1;
-        }
+        // if($role == 'student') {
+        //     $roleUser = 0;
+        // } else {
+        //     $roleUser = 1;
+        // }
         $name = $fname . $lname;
 
     } else {
@@ -106,8 +106,8 @@ if ($result->num_rows > 0) {
 }
 
 // Insert the user data into the database
-$sql = "INSERT INTO users   ( username,fname, lname, email, semester, branch ,enroll ,batch, college, mobile, psw , pswRep)
-VALUES ('$username', '$fname', '$lname', '$email', '$semester', '$branch', $enroll , '$batch', '$college', '$mobile', '$psw' , '$pswRep')";
+$sql = "INSERT INTO users   ( role, username,fname, lname, email, semester, branch ,enroll ,batch, college, mobile, psw , pswRep)
+VALUES ('$role' , $username', '$fname', '$lname', '$email', '$semester', '$branch', $enroll , '$batch', '$college', '$mobile', '$psw' , '$pswRep')";
 
 if(empty($branch) || empty($batch) || empty($college) || empty($mobile) || empty($psw) || empty($psw_repeat)) {
     echo "Please fill all the fields.";}

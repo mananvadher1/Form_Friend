@@ -135,10 +135,10 @@
         <div class="container">
             <h1>Login</h1>
             <div style="display: flex; justify-content: center;">
-                <input type="radio" name="role" id="student" value="student">
-                <label for="student" style="font-weight: bold;">Student</label>
-                <input type="radio" name="role" id="faculty" value="faculty">
-                <label for="faculty" style="font-weight: bold;">Faculty</label>
+                <input type="radio" name="role" id="student" value="0">
+                <label for="0" style="font-weight: bold;">Student</label>
+                <input type="radio" name="role" id="faculty" value="1">
+                <label for="1" style="font-weight: bold;">Faculty</label>
             </div>
             <hr>
 

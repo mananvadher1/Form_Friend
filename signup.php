@@ -199,9 +199,9 @@
             <div class="container">
                 <h1>Sign Up</h1>
                 <div style="display: flex; justify-content: center;">
-                    <input type="radio" name="role" id="student" value="student">
+                    <input type="radio" name="role" id="student" value="0">
                     <label for="student" style="font-weight: bold;">Student</label>
-                    <input type="radio" name="role" id="faculty" value="faculty">
+                    <input type="radio" name="role" id="faculty" value="1">
                     <label for="faculty" style="font-weight: bold;">Faculty</label>
                 </div>
                 <hr>
