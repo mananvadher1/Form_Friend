@@ -198,13 +198,19 @@
         <form action="./backend/registration.php" method="POST">
             <div class="container">
                 <h1>Sign Up</h1>
-                <div style="display: flex; justify-content: center;">
-                    <input type="radio" name="role" id="student" value="0">
+                <!-- <div style="display: flex; justify-content: center;">
                     <label for="student" style="font-weight: bold;">Student</label>
-                    <input type="radio" name="role" id="faculty" value="1">
+                    <input type="radio" name="role"  value="0" id="student">
                     <label for="faculty" style="font-weight: bold;">Faculty</label>
-                </div>
+                    <input type="radio" name="role" id="faculty" value="1">
+                    
+                </div> -->
                 <hr>
+                <label for="role">I am a:</label>
+                <select id="role" name="role">
+                    <option value="0">Student</option>
+                    <option value="1">Faculty</option>
+                </select>
 
 
                 <label for="username"><b>Username</b></label>

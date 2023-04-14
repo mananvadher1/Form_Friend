@@ -134,14 +134,14 @@
     <form action="./login_check.php" method="post"  >
         <div class="container">
             <h1>Login</h1>
-            <div style="display: flex; justify-content: center;">
-                <input type="radio" name="role" id="student" value="0">
-                <label for="0" style="font-weight: bold;">Student</label>
-                <input type="radio" name="role" id="faculty" value="1">
-                <label for="1" style="font-weight: bold;">Faculty</label>
-            </div>
             <hr>
-
+    
+                <label for="role">I am a:</label>
+                <select id="role" name="role">
+                    <option value="0">Student</option>
+                    <option value="1">Faculty</option>
+                </select>
+            <hr>
             <label for="username"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="username" id="username" required>
 

@@ -1,5 +1,11 @@
 <?php
-    include('./php/config.php');
+include('./php/config.php');
+session_start();
+echo "hello";
+if ($_SESSION['logedin']!="vandan") {
+    echo "<script>window.location.href = './login.php';</script>";
+    
+}
     ?>
 
 <!DOCTYPE html>
@@ -101,6 +107,9 @@
         button:hover {
             background-color: darkgreen;
         }
+        a{
+            decoration: none;
+        }
     </style>
 </head>
 
@@ -117,30 +126,37 @@
         <section>
             <h2>Form Management</h2>
             <table>
-                <thead>
-                    <tr>
-                        <th>Form Name</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Form 1</td>
-                        <td><button>Edit</button></td>
-                        <td><button>Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>Form 2</td>
-                        <td><button>Edit</button></td>
-                        <td><button>Delete</button></td>
-                    </tr>
-                </tbody>
-            </table>
+    <thead>
+        <tr>
+            <th>Form Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $sql = "SELECT * FROM forms";
+        $result = $conn->query($sql);
+        // Fetch results
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["formname"] . "</td>";
+                // echo "<td><button>Edit</button></td>";
+                echo "<td><button><a href='editform.php?id=" . $row["id"] . "' onclick='return confirm(\"Are you sure you want to edit this item?\");'>Edit</a></button></td>";
+                echo "<td><button><a href='delete.inc.php?id=" . $row["id"] . "' onclick='return confirm(\"Are you sure you want to delete this item?\");'>Delete</a></button></td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "0 results";
+        }
+        ?>
+    </tbody>
+</table>
         </section>
         <section>
             <h1>Create form for student</h1>
-            <form id="student-form">
+            <form action="formcreate.php" method="post">
                 <label for="formlink">Form Link :</label>
                 <input type="text" id="formlink" name="formlink" required placeholder="Paste your form link here "
                     class="sform">
@@ -154,48 +170,12 @@
                 <input type="text" id="formdes" name="formdes" required placeholder="enter your form description here"
                     class="sform">
                     <label for="formdeadline">Form deadline :</label>
-                <input type="text" id="formdeadline" name="formdeadline" required placeholder="enter your form description here"
+                <input type="date" id="formdeadline" name="formdeadline" required placeholder="enter your form description here"
                     class="sform">
-                    <!-- <label for="semester">Semester:</label>
-                    <select id="semester" name="semester" required>
-                        <option value="">Select a semester</option>
-                        <option value="1">First</option>
-                        <option value="2">Second</option>
-                        <option value="3">Third</option>
-                        <option value="4">Fourth</option>
-                        <option value="5">Fifth</option>
-                        <option value="6">Sixth</option>
-                        <option value="7">Seventh</option>
-                        <option value="8">Eighth</option>
-                    </select>
-                    <label for="branch">Branch:</label>
-                    <select id="branch" name="branch" required>
-                        <option value="">Select a branch</option>
-                        <option value="CSE">Computer Science and Engineering</option>
-                        <option value="ECE">Electronics and Communication Engineering</option>
-                        <option value="ME">Mechanical Engineering</option>
-                        <option value="CE">Civil Engineering</option>
-                        <option value="EE">Electrical Engineering</option>
-                    </select>
-                    <label for="batch">Batch:</label>
-                    <select id="batch" name="batch" required>
-                        <option value="">Select a batch</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                    </select>
-                    <label for="college">College:</label>
-                    <select id="college" name="college" required>
-                        <option value="">Select a college</option>
-                        <option value="ABC">ABC College of Engineering</option>
-                        <option value="XYZ">XYZ College of Technology</option>
-                        <option value="PQR">PQR College of Science</option>
-                    </select> -->
-                <!-- Add a hidden input to store the selected users' email addresses -->
-                <input type="hidden" id="selected-users" name="selected-users" value="">
+                    
                 <!-- Add a button to submit the form -->
-                <button type="submit" id="submit-button">Create Form</button>
-            </form>
+                <button type="submit" name="createform">Create</button>
+                </form>
 
             <!-- Add some JavaScript code to handle the form submission -->
             <script>
@@ -279,17 +259,113 @@
         <section>
             <h2>Reminders</h2>
             <form>
-                <label for="form-name">Form Name:</label>
-                <select id="form-name">
-                    <option value="form1">Form 1</option>
-                    <option value="form2">Form 2</option>
-                </select>
-                <label for="reminder-date">Reminder Date:</label>
-                <input type="date" id="reminder-date" name="">
-                <label for="reminder-time">Reminder Time:</label>
-                <input type="time" id="reminder-time">
-                <button id="schedule-reminder">Schedule Reminder</button>
-            </form>
+  <p>Select your branch:</p>
+  <select id="branch" onchange="showSemester(); showBatch();"> <!-- Use a select element for the branch -->
+    <option value="CSE">CSE</option>
+    <option value="ECE">ECE</option>
+    <option value="MECH">MECH</option>
+  </select>
+
+  <p>Select your semester:</p>
+  <select id="semester">
+    <!-- The options will be added by the script -->
+  </select>
+
+  <p>Select your batch:</p>
+  <select id="batch">
+    <!-- The options will be added by the script -->
+  </select>
+
+  <input type="button" value="Submit" onclick="submitForm();">
+  <!-- <button type="submit" name="sendmail" value="Submit" onclick="submitForm();>Send reminder</button> -->
+</form>
+
+<script>
+function getBranch() {
+  var branch = document.getElementById("branch").value; // Get the value of the branch select element
+  return branch;
+}
+
+// This function shows the semesters based on the branch
+function showSemester() {
+  var branch = getBranch();
+  var semester = document.getElementById("semester");
+  semester.innerHTML = ""; // Clear the previous options
+  if (branch == "CSE") {
+    // Add options for CSE branch
+    semester.innerHTML += "<option value='1'>First</option>";
+    semester.innerHTML += "<option value='2'>Second</option>";
+    semester.innerHTML += "<option value='3'>Third</option>";
+    semester.innerHTML += "<option value='4'>Fourth</option>";
+    semester.innerHTML += "<option value='5'>Fifth</option>";
+    semester.innerHTML += "<option value='6'>Sixth</option>";
+    semester.innerHTML += "<option value='7'>Seventh</option>";
+    semester.innerHTML += "<option value='8'>Eighth</option>";
+  } else if (branch == "ECE") {
+    // Add options for ECE branch
+    semester.innerHTML += "<option value='1'>First</option>";
+    semester.innerHTML += "<option value='2'>Second</option>";
+    semester.innerHTML += "<option value='3'>Third</option>";
+    semester.innerHTML += "<option value='4'>Fourth</option>";
+    semester.innerHTML += "<option value='5'>Fifth</option>";
+    semester.innerHTML += "<option value='6'>Sixth</option>";
+  } else if (branch == "MECH") {
+    // Add options for MECH branch
+    semester.innerHTML += "<option value='1'>First</option>";
+    semester.innerHTML += "<option value='2'>Second</option>";
+    semester.innerHTML += "<option value='3'>Third</option>";
+    semester.innerHTML += "<option value='4'>Fourth</option>";
+  }
+}
+
+
+function showBatch() {
+  var branch = getBranch();
+  var batch = document.getElementById("batch");
+  batch.innerHTML = ""; // Clear the previous options
+  if (branch == "CSE") {
+    // Add options for CSE branch
+    batch.innerHTML += "<option value='C1'>C1</option>";
+    batch.innerHTML += "<option value='C2'>C2</option>";
+    batch.innerHTML += "<option value='C3'>C3</option>";
+  } else if (branch == "ECE") {
+    // Add options for ECE branch
+    batch.innerHTML += "<option value='E1'>E1</option>";
+    batch.innerHTML += "<option value='E2'>E2</option>";
+    batch.innerHTML += "<option value='E3'>E3</option>";
+    batch.innerHTML += "<option value='E4'>E4</option>";
+  } else if (branch == "MECH") {
+    // Add options for MECH branch
+    batch.innerHTML += "<option value='M1'>M1</option>";
+    batch.innerHTML += "<option value='M2'>M2</option>";
+    batch.innerHTML += "<option value='M3'>M3</option>";
+    batch.innerHTML += "<option value='M4'>M4</option>";
+    batch.innerHTML += "<option value='M5'>M5</option>";
+    batch.innerHTML += "<option value='M6'>M6</option>";
+  }
+}
+// This function submits the form data to a server
+function submitForm() {
+  // Get the form data
+  var branch = getBranch();
+  var semester = document.getElementById("semester").value;
+  var batches = [];
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  // Loop over the checkboxes and push the checked ones to the batches array
+  for (var i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked) {
+      batches.push(checkboxes[i].value);
+    }
+  }
+  // Send the form data to the server using AJAX or a form submit
+  // For example, using jQuery:
+  $.post("server.php", {branch: branch, semester: semester, batches: batches}, function(data) {
+    // Handle the server response
+    alert(data);
+  });
+}
+</script>
+
         </section>
         <section>
             <h2>Form Analytics</h2>
@@ -306,7 +382,7 @@
                         <th>Delete</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody> 
                     <tr>
                         <td>John Doe</td>
                         <td>johndoe@example.com</td>
@@ -321,7 +397,7 @@
                     </tr>
                 </tbody>
             </table>
-        </section>
+        </section> 
     </main>
     <script>
 
