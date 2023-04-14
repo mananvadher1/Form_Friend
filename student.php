@@ -1,5 +1,10 @@
+
 <?php
+session_start();
     include('./php/config.php');
+    
+    echo $_SESSION['logedin'];
+    $username= $_SESSION['username']  ;
     ?>
 
 <!DOCTYPE html>
@@ -54,7 +59,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="./home.php">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="./index.php">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="student_profile.php">Profile</a>
@@ -71,12 +76,50 @@
             <!-- Sidebar -->
             <div class="col-md-3">
                 <div class="card">
-                    <div class="card-header">Welcome, Student!</div>
+                    <div class="card-header">Welcome, <?php
+// Retrieve session variables
+echo $_SESSION["username"] . ".<br>";
+
+?></div>
                     <div class="card-body">
-                        <p>Your ID: 123456</p>
-                        <p>Your Branch: Computer Science</p>
-                        <p>Your Semester: 6</p>
-                    </div>
+                        <p>Your ID:  <?php $sql = "SELECT enroll FROM users where username = '$username' ";
+$result = $conn->query($sql);
+
+// Fetch results
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+    echo $row["enroll"] . "<br>";
+  }
+} else {
+  echo "0 results";
+}
+?></p>
+                        <p>Your Branch: <?php $sql = "SELECT branch FROM users where username = '$username' ";
+$result = $conn->query($sql);
+
+// Fetch results
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+    echo  $row["branch"] . "<br>";
+  }
+} else {
+  echo "0 results";
+}
+?>
+</p>
+                        <p>Your Semester: <br> <?php $sql = "SELECT semester FROM users where username = '$username' ";
+$result = $conn->query($sql);
+
+// Fetch results
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+    echo $row["semester"] . "<br>";
+  }
+} else {
+  echo "0 results";
+}
+?></p>
+      </div>
                 </div>
 
                 <div class="card">
@@ -102,48 +145,42 @@
                 <h3>Forms shared by administrators</h3>
                 <!-- Table of forms -->
                 <table class="table table-striped table-bordered table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Form Name</th>
-                            <th scope="col">Form Link</th>
-                            <th scope="col">Form Description</th>
-                            <th scope="col">Form Deadline</th>
-                            <th scope="col">Form Status</th>
-                            <th scope="col">Form Consent</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Example row -->
-                        <tr>
-                            <!-- Form name -->
-                            <td>Feedback Form for Course A</td>
-
-                            <!-- Form link -->
-                            <!-- Use a tag with form-link class -->
-                            <td><a href="#" class="form-link">Click here to fill out the form</a></td>
-
-                            <!-- Form description -->
-                            <td>This form is to collect your feedback on Course A. Your feedback is valuable and will
-                                help us improve the course quality.</td>
-
-                            <!-- Form deadline -->
-                            <td>31 March 2023</td>
-
-                            <!-- Form status -->
-                            <!-- Use span tag with badge class -->
-                            <td><span class="badge badge-danger">Not filled</span></td>
-
-                            <!-- Form consent -->
-                            <!-- Use button tag with consent-btn class -->
-                            <td>
-                                <button class="btn btn-success consent-btn">Yes</button>
-                                <button class="btn btn-danger consent-btn">No</button>
-                                <button class="btn btn-warning consent-btn">Maybe</button>
-                            </td>
-                        </tr>
-                        <!-- Add more rows as needed -->
-                    </tbody>
-                </table>
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Form Name</th>
+            <th scope="col">Form Link</th>
+            <th scope="col">Form Description</th>
+            <th scope="col">Form Deadline</th>
+            <th scope="col">Form Status</th>
+            <th scope="col">Form Consent</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $sql = "SELECT * FROM forms";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["formname"] . "</td>";
+                echo '<td>' ."<a href='$row[formlink]'>click here for form link!</a>". '</td>';
+                // echo "<td>" . $row["formlink"] . "</td>";
+                echo "<td>" . $row["formdes"] . "</td>";
+                echo "<td>" . $row["formdeadline"] . "</td>";
+                echo "<td><span class=\"badge badge-danger\">Not filled</span></td>";
+                echo "<td>";
+                echo "<button class=\"btn btn-success consent-btn\">Yes</button>";
+                echo "<button class=\"btn btn-danger consent-btn\">No</button>";
+                echo "<button class=\"btn btn-warning consent-btn\">Maybe</button>";
+                echo "</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "0 results";
+        }
+        ?>
+    </tbody>
+</table>
             </div>
         </div>
     </div>
